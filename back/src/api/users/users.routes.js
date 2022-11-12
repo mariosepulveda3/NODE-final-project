@@ -28,7 +28,7 @@ router.get("/", [isAuth], async (req, res) => {
 router.post('/login', async (req, res) => {
     try{
         const userDB = await User.findOne({email: req.body.email});
-        if (!users) {
+        if (!userDB) {
             res.status(404).json("No existe el usuario indicado");
         }
         if (bcrypt.compareSync(req.body.password, userDB.password)){
